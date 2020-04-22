@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Corona Helper login</title>
+    </head>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
+	    <link type="text/css" rel="stylesheet" href="css/main.css"
+	th:href="@{css/main.css}" />
+	
+	<!-- Tällä sivulla käyttäjä kirjautuu sisään. Ensimmäinen sivu. Uloskirjautuessa käyttäjä ohjautuu takaisin tälle sivulle -->
+   
+    <body>
+    <div class="container text-center"> 
+    	<div style="padding-top: 20px">
+    		<form th:action="@{/login}" method="post">
+    			<div th:if="${param.error}">
+            		<font color="red">Invalid username or/and password.</font>
+        		</div>
+        		<div th:if="${param.logout}">
+            		<font color="green">You have been logged out.</font>
+        		</div>
+				<div>
+       				<h1>Welcome to the Corona helper page!</h1>
+       				<h3>Please sign in.</h3>
+       				<strong>In these difficult times we must help each others!<3</strong>
+       			</div>
+       			<br />
+       			<div>
+       				<label> User Name: <input class="form-control" type="text" name="username"/> </label>
+       			</div>
+            	<div>
+            		<label> Password: <input class="form-control" type="password" name="password"/> </label>
+            	</div>
+            	<div>
+            		<input class="btn btn-success" type="submit" value="Sign In"/>
+            	</div>
+        	</form>
+        </div>
+     </div>   
+    </body>
+</html>

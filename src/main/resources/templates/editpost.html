@@ -1,0 +1,43 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List of posts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css" th:href="@{./css/bootstrap.min.css}" />
+
+<!-- En saanut toimimaan bootstrappia editpost-sivulla jonkin takia -->
+<!-- Tällä sivulla Admin käyttäjä voi muokata käyttäjien jättämiä postauksia käyttäjän pyynnöstä. -->
+
+<body>
+<div class="container text-center">
+	<h1>Edit post</h1>
+	<div>
+		<form th:object="${post}" th:action="@{../save}" action="#" method="post">
+			<label for="id"></label>
+			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+		  	<label for="postString">Post</label>
+			<input type="text" id="postString" th:field="*{postString}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="email">Email</label>
+			<input type="text" id="email" th:field="*{email}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="phone">Phone</label>
+			<input type="text" id="phone" th:field="*{phone}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="arealist">Area</label>
+			<select id="arealist" th:field="*{area.areaid}" class="form-control">
+				<option
+					th:each="area: ${areas}"
+					th:value="${area.areaid}"
+					th:text="${area.name}"
+					></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input class= "btn btn-success" type="submit" value="Save"></input>
+		</form>
+	</div>
+	</div>
+</body>
+</html>

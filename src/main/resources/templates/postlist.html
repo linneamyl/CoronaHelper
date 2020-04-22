@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List of posts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<body>
+
+<!-- Tällä sivulla user-käyttäjä näkee kaikki postaukset ja voi lisätä oman postauksensa -->
+<!-- Admin-käyttäjä voi lisäksi muokata ja poistaa muiden käyttäjien postauksia -->
+
+<div class="container text-center">
+	<div class="float-left m-2">
+	 <form th:action="@{/logout}" method="post">
+            <input class="btn btn-danger" type="submit" value="Logout"/> 
+        </form> 
+    </div>
+	<h1>Write your post for helping in the corona crisis!</h1>
+	<div class="alert alert-success col-md-4 mx-auto" role="alert">
+		<span th:inline="text">Welcome:<strong> [[${#httpServletRequest.remoteUser}]]!</strong></span>
+	</div>
+	<div>
+	    <table class="table table-bordered">
+			<thead class="thead-light">
+			<tr>
+			    <th>Post</th>
+			    <th>Email</th>
+			    <th>Phone number</th>
+			    <th>Area</th>
+			    <!-- Delete ja Edit nappi tulisi vain näkyä roolilla Admin -->
+			    <th sec:authorize="hasRole('ADMIN')">Delete</th>
+			    <th sec:authorize="hasRole('ADMIN')">Edit</th>
+			</tr> 
+			</thead> 
+	    	<tr th:each = "post : ${posts}">
+	    		<td th:text="${post.postString}"></td>
+	    		<td th:text="${post.email}"></td>
+	    		<td th:text="${post.phone}"></td>
+	    		<td th:text="${post.area.name}"></td>
+	    		<!-- Vain näkyville roolilla admin -->
+	 			<td sec:authorize="hasAuthority('ADMIN')">
+	 				<a th:href="@{/delete/{id}(id=${post.id})}"
+	 				 class="btn btn-danger">Delete
+	 				</a>
+	 			</td>
+	 			<td sec:authorize="hasAuthority('ADMIN')">
+	 				<a th:href="@{/editpost/{id}(id=${post.id})}">
+	 					<button class="btn btn-warning">Edit</button>
+	 				</a>
+	 			</td>
+	    	</tr>
+	     </table>
+	     <div class="float-right">
+	     <!-- Tämä vie sivulle /addpost -->
+		<a href="/addpost"><button class="btn btn-success">Add Post</button></a> 
+		</div>
+	 </div> 
+	 </div> 	
+</body>
+</html>
