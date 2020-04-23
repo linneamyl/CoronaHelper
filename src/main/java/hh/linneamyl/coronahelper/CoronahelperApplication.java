@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
+
 import hh.linneamyl.coronahelper.model.Area;
 import hh.linneamyl.coronahelper.model.Post;
 import hh.linneamyl.coronahelper.model.User;
@@ -14,9 +15,9 @@ import hh.linneamyl.coronahelper.repository.AreaRepository;
 import hh.linneamyl.coronahelper.repository.PostRepository;
 import hh.linneamyl.coronahelper.repository.UserRepository;
 
-
 @SpringBootApplication
 public class CoronahelperApplication {
+	private static final Logger log = LoggerFactory.getLogger(CoronahelperApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(CoronahelperApplication.class, args);
@@ -51,8 +52,5 @@ public class CoronahelperApplication {
 			}
 		};
 	}
-
-
-
 
 }
