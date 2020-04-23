@@ -69,6 +69,7 @@ public class CoronahelperController {
         return "redirect:postlist";
     }   
     
+    
     //Vain admin-käyttäjä saa poistaa postauksia
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -87,6 +88,12 @@ public class CoronahelperController {
     	model.addAttribute("post", post);
         return "editpost";
     }
+    
+    //Peruutus
+    @RequestMapping(value="/cancel")
+   	public String cancel() {
+   		return "redirect:postlist";
+   	} 
     
     //Sisäänbkirjautuminen
     @RequestMapping(value="/login")
